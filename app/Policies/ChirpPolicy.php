@@ -39,13 +39,17 @@ class ChirpPolicy
         return $chirp->user()->is($user);
     }
 
-    // /**
-    //  * Determine whether the user can delete the model.
-    //  */
-    // public function delete(User $user, Chirp $chirp): bool
-    // {
-    //     //
-    // }
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, Chirp $chirp): bool
+    {
+        /*
+        updateメソッドのロジックを繰り返し記述せずにdeleteメソッドからupdateメソッドを呼び出すことで同じロジックを定義できます。
+        Chirp の更新を許可された人は誰でも、それを削除する権限も与えられます。
+        */
+        return $this->update($user, $chirp);
+    }
 
     // /**
     //  * Determine whether the user can restore the model.
